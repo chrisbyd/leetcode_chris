@@ -48,3 +48,38 @@ sol = Solution()
 nums = [5, -3, 5]
 res = sol.maxSubarraySumCircular(nums)
 print(res)
+
+
+## prefix sum + monoque
+
+
+
+
+
+##kadaen algorithm * 2
+from collections import deque
+
+class Solution:
+    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        n = len(nums) 
+     
+        tsum = sum(nums)
+        dp = [0]* (n+1)
+        dp1 = [0] * (n + 1)
+        for i in range(n):
+            dp[i+1] = max(dp[i]+ nums[i], nums[i])
+        for i in range(n):
+            dp1[i+1] = min(dp1[i]+ nums[i], nums[i])
+        ans = max(dp)
+        if ans == 0:
+            return max(nums)
+        ans = max(ans, tsum - min(dp1))
+        return ans 
+sol = Solution()
+nums = [-10,-7,9,-7,6,9,-9,-4,-8,-5]
+res = sol.maxSubarraySumCircular(nums)
+print(res)
+
+
+
+
